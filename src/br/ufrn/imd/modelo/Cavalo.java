@@ -4,7 +4,7 @@ public class Cavalo extends Peca implements Movimentos {
 
 	public Cavalo() {
 		this.setNome("Cavalo");
-		String refs[] = {"file:cavaloPreto.png","file:avaloBranco.png"};
+		String refs[] = {"file:img/cavaloPreto.png","file:/img/cavaloPreto.png"};
 		this.setImagem(refs);
 		this.setEstado(true);
 	}

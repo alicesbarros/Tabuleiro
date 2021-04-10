@@ -34,6 +34,9 @@ public abstract class Peca {
 	public Casa getPosicao() {
 		return posicao;
 	}
+	public int getPosicao(int i) {
+		return posicao.getLocal()[i];
+	}
 	public void setPosicao(Casa posicao) {
 		this.posicao = posicao;
 	}

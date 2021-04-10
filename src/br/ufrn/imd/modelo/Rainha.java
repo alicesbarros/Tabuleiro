@@ -4,7 +4,7 @@ public class Rainha extends Peca implements Movimentos {
 
 	public Rainha() {
 		this.setNome("Rainha");
-		String refs[] = {"file:rainhaPreta.png","file:rainhaBranca.png"};
+		String refs[] = {"file:img/rainhaPreta.png","file:img/rainhaBranca.png"};
 		this.setImagem(refs);
 	}
 	@Override

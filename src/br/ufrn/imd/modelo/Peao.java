@@ -4,7 +4,7 @@ public class Peao extends Peca implements Movimentos {
 
 	public Peao() {
 		this.setEstado(true);
-		String refs[] = {"file:peaoPreto.png","file:peaoBranco.png"};
+		String refs[] = {"file:img/peaoPreto.png","file:img/peaoBranco.png"};
 		this.setImagem(refs);
 		this.setNome("Peao");
 	}

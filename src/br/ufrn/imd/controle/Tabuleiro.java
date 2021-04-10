@@ -15,6 +15,7 @@ public class Tabuleiro {
 		for (int ii=0;ii<8;ii++) {
 			for (int jj=0;jj<8;jj++) {
 				casa[ii][jj] = new Casa();
+				casa[ii][jj].setLocal(ii, jj);
 			}
 		}
 		ocupar(casa[0][0],branco.getTorre(0));
