@@ -4,7 +4,8 @@ public class Bispo extends Peca implements Movimentos {
 
 	public Bispo() {
 		this.setEstado(true);
-		this.setImagem("B");
+		String refs[] = {"file:bispoPreto.png","file:bispoBranco.png"};
+		this.setImagem(refs);
 		this.setNome("Bispo");
 	}
 	@Override

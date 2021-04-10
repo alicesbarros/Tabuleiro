@@ -4,5 +4,4 @@ public interface Movimentos {
 	Casa andar();
 	Peca comer();
 	void morrer();
-	//Casa[] possiveis();
 }

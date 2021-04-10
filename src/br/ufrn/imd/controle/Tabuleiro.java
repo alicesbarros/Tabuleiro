@@ -1,26 +1,13 @@
 package br.ufrn.imd.controle;
 
 import br.ufrn.imd.modelo.Casa;
-import br.ufrn.imd.modelo.Jogador;
 import br.ufrn.imd.modelo.Peca;
 
 public class Tabuleiro {
 	private Jogador branco;
 	private Jogador preto;
 	private Casa casa[][];
-	
-	public void imprimir() {
-		for (int ii=0;ii<8;ii++) {
-			for(int jj=0;jj<8;jj++) {
-				if(casa[ii][jj].getOcupada()!=null) System.out.print(casa[ii][jj].getOcupada().getImagem()+" ");
-				else {
-					if((ii+jj)%2==1)System.out.print("# ");
-					else System.out.print("@ ");
-				}
-			}
-			System.out.print("\n");
-		}
-	}
+
 	public Tabuleiro() {
 		branco = new Jogador(false);
 		preto = new Jogador(true);

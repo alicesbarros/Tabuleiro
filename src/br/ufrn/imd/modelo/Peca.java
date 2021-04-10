@@ -2,7 +2,7 @@ package br.ufrn.imd.modelo;
 
 public abstract class Peca {
 	private String nome;
-	private String imagem;
+	private String[] imagem;
 	private boolean estado;
 	private boolean moveu;
 	private Casa posicao;
@@ -13,10 +13,10 @@ public abstract class Peca {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getImagem() {
-		return imagem;
+	public String getImagem(int jogador) {
+		return imagem[jogador];
 	}
-	public void setImagem(String imagem) {
+	public void setImagem(String[] imagem) {
 		this.imagem = imagem;
 	}
 	public boolean isEstado() {

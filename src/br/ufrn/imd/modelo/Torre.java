@@ -5,7 +5,8 @@ public class Torre extends Peca implements Movimentos {
 	public Torre() {
 		this.setEstado(true);
 		this.setNome("Torre");
-		this.setImagem("T");
+		String refs[] = {"file:torrePreta.png","file:torreBranca.png"};
+		this.setImagem(refs);
 	}
 	@Override
 	public Casa andar() {

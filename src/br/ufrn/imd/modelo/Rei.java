@@ -4,7 +4,8 @@ public class Rei extends Peca implements Movimentos {
 
 	public Rei() {
 		this.setNome("Rei");
-		this.setImagem("K");
+		String refs[] = {"file:eiPreto.png","file:reiBranco.png"};
+		this.setImagem(refs);
 	}
 	@Override
 	public Casa andar() {
