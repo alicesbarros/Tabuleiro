@@ -62,7 +62,5 @@ public class Tabuleiro {
 	}
 	public void setCasa(Casa casa[][]) {
 		this.casa = casa;
-	}
-	
-	
+	}	
 }

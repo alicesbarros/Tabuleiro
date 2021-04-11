@@ -5,5 +5,5 @@ import br.ufrn.imd.controle.*;
 public interface Movimentos {
 	ArrayList<Casa> andar(Tabuleiro T);
 	Peca comer();
-	void morrer();
+	void morrer();	
 }

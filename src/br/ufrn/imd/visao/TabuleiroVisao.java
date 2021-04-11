@@ -98,7 +98,34 @@ public class TabuleiroVisao {
 				public void handle(MouseEvent event) {
 					int j=p.getRowIndex(casa);			
 					int i=p.getColumnIndex(casa);
-					if(tabula.getCasa()[i][j].getOcupada()!=null) {	
+					if(informativa.getChildren().contains(selecionada)) {
+						int k = informativa.getColumnIndex(selecionada);
+						int l = informativa.getRowIndex(selecionada);
+						if(j==l && i==k) {
+							informativa.getChildren().remove(selecionada);
+						}else {
+							boolean movimentoConcluido = false;
+							for(Rectangle possivel:podeIr) {
+								if(!informativa.getChildren().contains(possivel))
+									break;
+								if(i==informativa.getColumnIndex(possivel) && j==informativa.getRowIndex(possivel)) {
+									tabula.getCasa()[l][k].getOcupada().mover(tabula.getCasa()[i][j]);
+									//tabula.mover(tabula.getCasa()[l][k].getOcupada(), tabula.getCasa()[i][j]);
+									atualizarPecas();
+									movimentoConcluido = true;
+								}
+							}
+							if(!movimentoConcluido) {
+								informativa.getChildren().remove(selecionada);
+								int cont=0;
+								while(informativa.getChildren().contains(podeIr.get(cont))) {
+									informativa.getChildren().remove(podeIr.get(cont));
+									cont++;
+								}
+							}
+						}
+					}					
+					else if(tabula.getCasa()[i][j].getOcupada()!=null) {	
 						if(tabula.getCasa()[i][j].getOcupada().getDono()==daVez) {
 							informativa.getChildren().remove(selecionada);
 							informativa.add(selecionada, i, j);

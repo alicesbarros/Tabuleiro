@@ -1,4 +1,4 @@
-package br.ufrn.imd.visao;
+package br.ufrn.imd.controle;
 
 import javafx.scene.text.Text;
 import javafx.scene.layout.VBox;

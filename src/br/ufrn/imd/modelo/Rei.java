@@ -18,7 +18,7 @@ public class Rei extends Peca{
 		int col = this.getPosicao(0);
 		for(int i=-1;i<=1;i++) {
 			for(int j=-1;j<=1;j++) {
-				if(lin+i<8 && lin+1>=0 && col+j<8 && col+j>=0) {
+				if(lin+i<8 && lin+i>=0 && col+j<8 && col+j>=0) {
 					if(T.getCasa()[lin+i][col+j].getOcupada()==null) {
 						possiveis.add(T.getCasa()[lin+i][col+j]);			
 					}

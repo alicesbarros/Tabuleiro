@@ -1,5 +1,6 @@
 package br.ufrn.imd.visao;
 
+import br.ufrn.imd.controle.Tempo;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;

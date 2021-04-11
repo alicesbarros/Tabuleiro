@@ -100,4 +100,11 @@ public class Jogador {
 	public ArrayList<Peca> getPecas(){
 		return pecas;
 	}
+	public void troca(Peao nobre) {
+		Rainha nova = new Rainha();
+		nova.setDono(this);
+		nova.setPosicao(nobre.getPosicao());
+		this.pecas.remove(nobre);
+		this.pecas.add(nova);
+	}
 }

@@ -23,10 +23,12 @@ public class Peao extends Peca{
 			else
 				possiveis.add(T.getCasa()[lin][col-2]);
 		}
-		if(this.getDono()==T.getBranco())
+		if(this.getDono()==T.getBranco()) {
 			possiveis.add(T.getCasa()[lin][col+1]);
-		else
-			possiveis.add(T.getCasa()[lin][col-1]);
+		}
+		else {
+			possiveis.add(T.getCasa()[lin][col-1]);						
+		}			
 		return possiveis;
 	}
 
@@ -38,8 +40,16 @@ public class Peao extends Peca{
 
 	@Override
 	public void morrer() {
-		// TODO Auto-generated method stub
 
 	}
-
+	public void troca() {
+		this.getDono().troca(this);
+	}
+	@Override	
+	public void mover(Casa nova) {
+		super.mover(nova);
+		if(this.getPosicao(1)==0 ||this.getPosicao(1)==8) {
+			this.troca();
+		}
+	}
 }
