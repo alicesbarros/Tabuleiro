@@ -30,9 +30,9 @@ public class Tempo extends AnimationTimer{
 			}else {
 				tempoPreto++;
 			}
-			total.setText(String.format("%02d:%02d:%02d",tempoTotal/360,(tempoTotal/360)%60,tempoTotal%60));
-			branco.setText(String.format("%02d:%02d:%02d",tempoBranco/360,(tempoBranco/360)%60,tempoBranco%60));
-			preto.setText(String.format("%02d:%02d:%02d",tempoPreto/360,(tempoPreto/360)%60,tempoPreto%60));
+			total.setText(String.format("%02d:%02d:%02d",tempoTotal/(60*360),(tempoTotal/360)%60,tempoTotal%60));
+			branco.setText(String.format("%02d:%02d:%02d",tempoBranco/(60*360),(tempoBranco/360)%60,tempoBranco%60));
+			preto.setText(String.format("%02d:%02d:%02d",tempoPreto/(60*360),(tempoPreto/360)%60,tempoPreto%60));
 		}
 	}
 	

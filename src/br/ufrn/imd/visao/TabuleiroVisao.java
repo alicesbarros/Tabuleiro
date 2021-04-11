@@ -3,10 +3,9 @@ package br.ufrn.imd.visao;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
-import br.ufrn.imd.controle.Tabuleiro;
+import br.ufrn.imd.controle.*;
 import br.ufrn.imd.modelo.Casa;
 import br.ufrn.imd.modelo.Peca;
 import javafx.geometry.Pos;
@@ -14,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.event.*;
+import java.util.ArrayList;
 
 public class TabuleiroVisao {
 	GridPane base;
@@ -25,6 +25,9 @@ public class TabuleiroVisao {
 	GridPane pecas;
 	GridPane informativa;
 	Rectangle selecionada;
+	ArrayList<Rectangle> podeIr;
+	int selecao[];
+	Jogador daVez;
 	
 	public TabuleiroVisao(){
 		base = new GridPane();
@@ -36,6 +39,9 @@ public class TabuleiroVisao {
 		pecas.setVgap(2);
 		informativa.setHgap(2);
 		informativa.setVgap(2);
+		selecao = new int[2];
+		selecao[0] = -1;
+		selecao[1] = -1;
 		
 		casas = new Rectangle[8][8];
 		ocupadas = new Rectangle[8][8];
@@ -46,6 +52,17 @@ public class TabuleiroVisao {
 		selecionada.setStroke(Color.AZURE);
 		selecionada.setStrokeWidth(4);
 		selecionada.setStrokeType(StrokeType.INSIDE);
+		
+		podeIr = new ArrayList<Rectangle>();
+		for(int i=0;i<24;i++) {
+			Rectangle tempAzul = new Rectangle(60,60);
+			tempAzul.setFill(Color.TRANSPARENT);
+			tempAzul.setStroke(Color.GREENYELLOW);
+			tempAzul.setStrokeWidth(4);
+			tempAzul.setStrokeType(StrokeType.INSIDE);
+			podeIr.add(tempAzul);
+		}
+		
 		tabula = new Tabuleiro();
 		
 		for(int i=0;i<8;i++) {
@@ -70,6 +87,7 @@ public class TabuleiroVisao {
 		niveis.getChildren().add(informativa);
 		pecas.setAlignment(Pos.TOP_CENTER);		
 		eventosGrid(informativa);
+		daVez=tabula.getBranco();
 	}
 	
 	public void eventosGrid(GridPane p) {
@@ -78,23 +96,31 @@ public class TabuleiroVisao {
 				@SuppressWarnings("static-access")
 				@Override
 				public void handle(MouseEvent event) {
-					int i=p.getColumnIndex(casa);
 					int j=p.getRowIndex(casa);			
-					if(tabula.getCasa()[j][i].getOcupada()!=null) {						
-						informativa.add(selecionada, i, j);
-						
-						
-						
-						
-						//está dando erro aqui.
-						
-						
-						
-						
+					int i=p.getColumnIndex(casa);
+					if(tabula.getCasa()[i][j].getOcupada()!=null) {	
+						if(tabula.getCasa()[i][j].getOcupada().getDono()==daVez) {
+							informativa.getChildren().remove(selecionada);
+							informativa.add(selecionada, i, j);
+							mover(tabula.getCasa()[i][j]);
+						}						
 					}
 				}
 			});
 		});
+	}
+	
+	public void mover(Casa daPeca) {		
+		int cont=0;
+		while(informativa.getChildren().contains(podeIr.get(cont))) {
+			informativa.getChildren().remove(podeIr.get(cont));
+			cont++;
+		}
+		cont=0;
+		for(Casa essa:daPeca.getOcupada().andar(tabula)) {
+			informativa.add(podeIr.get(cont),essa.getLocal()[1],essa.getLocal()[0]);
+			cont++;
+		}
 	}
 	
 	public StackPane getTudo() {
@@ -125,13 +151,13 @@ public class TabuleiroVisao {
 			ImageView iv = new ImageView(new Image(essa.getImagem(1),medida,medida,true,true));			
 			iv.setFitWidth(50);
 			iv.setFitHeight(50);
-			pecas.add(iv,essa.getPosicao(1),essa.getPosicao(0));			
+			pecas.add(iv,essa.getPosicao(0),essa.getPosicao(1));			
 		}
 		for(Peca essa : tabula.getPreto().getPecas()) {
 			ImageView iv = new ImageView(new Image(essa.getImagem(0),medida,medida,true,true));
 			iv.setFitHeight(50);
 			iv.setFitWidth(50);
-			pecas.add(iv,essa.getPosicao(1),essa.getPosicao(0));			
+			pecas.add(iv,essa.getPosicao(0),essa.getPosicao(1));			
 		}
 	}
 }

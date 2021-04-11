@@ -1,6 +1,10 @@
 package br.ufrn.imd.modelo;
 
-public class Rei extends Peca implements Movimentos {
+import java.util.ArrayList;
+
+import br.ufrn.imd.controle.Tabuleiro;
+
+public class Rei extends Peca{
 
 	public Rei() {
 		this.setNome("Rei");
@@ -8,9 +12,20 @@ public class Rei extends Peca implements Movimentos {
 		this.setImagem(refs);
 	}
 	@Override
-	public Casa andar() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Casa> andar(Tabuleiro T) {
+		ArrayList<Casa> possiveis = new ArrayList<Casa>(); 
+		int lin = this.getPosicao(1);
+		int col = this.getPosicao(0);
+		for(int i=-1;i<=1;i++) {
+			for(int j=-1;j<=1;j++) {
+				if(lin+i<8 && lin+1>=0 && col+j<8 && col+j>=0) {
+					if(T.getCasa()[lin+i][col+j].getOcupada()==null) {
+						possiveis.add(T.getCasa()[lin+i][col+j]);			
+					}
+				}
+			}				
+		}			
+		return possiveis;
 	}
 
 	@Override

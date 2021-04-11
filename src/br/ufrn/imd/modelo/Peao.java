@@ -1,6 +1,10 @@
 package br.ufrn.imd.modelo;
 
-public class Peao extends Peca implements Movimentos {
+import java.util.ArrayList;
+
+import br.ufrn.imd.controle.Tabuleiro;
+
+public class Peao extends Peca{
 
 	public Peao() {
 		this.setEstado(true);
@@ -9,8 +13,21 @@ public class Peao extends Peca implements Movimentos {
 		this.setNome("Peao");
 	}
 	@Override
-	public Casa andar() {
-		return this.getPosicao();
+	public ArrayList<Casa> andar(Tabuleiro T) {
+		ArrayList<Casa> possiveis = new ArrayList<Casa>(); 
+		int lin = this.getPosicao(1);
+		int col = this.getPosicao(0);
+		if(!this.isMoveu()) {
+			if(this.getDono()==T.getBranco())
+				possiveis.add(T.getCasa()[lin][col+2]);
+			else
+				possiveis.add(T.getCasa()[lin][col-2]);
+		}
+		if(this.getDono()==T.getBranco())
+			possiveis.add(T.getCasa()[lin][col+1]);
+		else
+			possiveis.add(T.getCasa()[lin][col-1]);
+		return possiveis;
 	}
 
 	@Override

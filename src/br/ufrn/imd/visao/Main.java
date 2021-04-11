@@ -39,7 +39,7 @@ public class Main extends Application {
 		
 		Controle.setMinWidth(120);
 		tabuleiro = new TabuleiroVisao();
-		//tabuleiro.getBase().set
+		
 		Mesa.getChildren().add(tabuleiro.getTudo());
 		Mesa.getChildren().add(Controle);		
 		cronometro.start();

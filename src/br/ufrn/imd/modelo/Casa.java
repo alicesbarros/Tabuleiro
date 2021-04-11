@@ -1,9 +1,11 @@
 package br.ufrn.imd.modelo;
 
+
 public class Casa {
 	private boolean cor;
 	private Peca ocupada;
 	private int[] local;
+	
 	public Casa() {
 		ocupada = null;
 		local = new int[2];

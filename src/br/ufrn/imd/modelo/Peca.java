@@ -1,12 +1,22 @@
 package br.ufrn.imd.modelo;
 
-public abstract class Peca {
+import br.ufrn.imd.controle.Jogador;
+
+public abstract class Peca implements Movimentos {
 	private String nome;
 	private String[] imagem;
 	private boolean estado;
 	private boolean moveu;
 	private Casa posicao;
+	private Jogador dono;
 	
+	public void setDono(Jogador Dono) {
+		dono = Dono;
+	}
+	
+	public Jogador getDono() {
+		return dono;
+	}
 	public String getNome() {
 		return nome;
 	}

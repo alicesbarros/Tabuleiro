@@ -27,15 +27,21 @@ public class Jogador {
 			pecas.add(torres[ii]);
 			pecas.add(bispos[ii]);
 			pecas.add(cavalos[ii]);
+			torres[ii].setDono(this);
+			bispos[ii].setDono(this);
+			cavalos[ii].setDono(this);
 		}
 		for(int ii=0;ii<8;ii++) {
 			peoes[ii] = new Peao();
 			pecas.add(peoes[ii]);
+			peoes[ii].setDono(this);
 		}
 		this.setRei(new Rei());
 		this.setRainha(new Rainha());
 		pecas.add(rei);
 		pecas.add(rainha);
+		rei.setDono(this);
+		rainha.setDono(this);
 	}
 	public boolean isCor() {
 		return cor;
