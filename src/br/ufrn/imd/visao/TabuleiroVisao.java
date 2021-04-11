@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.event.*;
 import java.util.ArrayList;
+import javafx.scene.text.Text;
 
 public class TabuleiroVisao {
 	GridPane base;
@@ -27,7 +28,8 @@ public class TabuleiroVisao {
 	Rectangle selecionada;
 	ArrayList<Rectangle> podeIr;
 	int selecao[];
-	Jogador daVez;
+	Jogador daVez;	
+	Text mensagem;
 	
 	public TabuleiroVisao(){
 		base = new GridPane();
@@ -42,6 +44,7 @@ public class TabuleiroVisao {
 		selecao = new int[2];
 		selecao[0] = -1;
 		selecao[1] = -1;
+		
 		
 		casas = new Rectangle[8][8];
 		ocupadas = new Rectangle[8][8];
@@ -82,6 +85,9 @@ public class TabuleiroVisao {
 		}	
 		atualizarPecas();
 		niveis = new StackPane();
+		mensagem = new Text();
+		mensagem.setText("Pronto");
+		informativa.add(mensagem, 0,8,8,1);
 		niveis.getChildren().add(base);
 		niveis.getChildren().add(pecas);
 		niveis.getChildren().add(informativa);
@@ -101,34 +107,35 @@ public class TabuleiroVisao {
 					if(informativa.getChildren().contains(selecionada)) {
 						int k = informativa.getColumnIndex(selecionada);
 						int l = informativa.getRowIndex(selecionada);
-						if(j==l && i==k) {
-							informativa.getChildren().remove(selecionada);
+						informativa.getChildren().remove(selecionada);
+						boolean movimentoConcluido = false;
+						for(Rectangle possivel:podeIr) {
+							if(!informativa.getChildren().contains(possivel))
+								break;
+							int m = informativa.getColumnIndex(possivel);
+							int n = informativa.getRowIndex(possivel);							
+							if(i==m && j==n) {
+								tabula.getCasa()[k][l].getOcupada().mover(tabula.getCasa()[m][n]);									
+								atualizarPecas();
+								movimentoConcluido = true;
+							}
+						}
+						if(!movimentoConcluido) {							
+							int cont=0;
+							while(informativa.getChildren().contains(podeIr.get(cont))) {
+								informativa.getChildren().remove(podeIr.get(cont));
+								cont++;
+							}
 						}else {
-							boolean movimentoConcluido = false;
-							for(Rectangle possivel:podeIr) {
-								if(!informativa.getChildren().contains(possivel))
-									break;
-								if(i==informativa.getColumnIndex(possivel) && j==informativa.getRowIndex(possivel)) {
-									tabula.getCasa()[l][k].getOcupada().mover(tabula.getCasa()[i][j]);
-									//tabula.mover(tabula.getCasa()[l][k].getOcupada(), tabula.getCasa()[i][j]);
-									atualizarPecas();
-									movimentoConcluido = true;
-								}
-							}
-							if(!movimentoConcluido) {
-								informativa.getChildren().remove(selecionada);
-								int cont=0;
-								while(informativa.getChildren().contains(podeIr.get(cont))) {
-									informativa.getChildren().remove(podeIr.get(cont));
-									cont++;
-								}
-							}
+							if(daVez==tabula.getBranco()) daVez=tabula.getPreto();
+							else daVez = tabula.getBranco();
 						}
 					}					
 					else if(tabula.getCasa()[i][j].getOcupada()!=null) {	
 						if(tabula.getCasa()[i][j].getOcupada().getDono()==daVez) {
 							informativa.getChildren().remove(selecionada);
 							informativa.add(selecionada, i, j);
+							mensagem.setText(String.format("%d %d",i,j));
 							mover(tabula.getCasa()[i][j]);
 						}						
 					}
@@ -159,8 +166,14 @@ public class TabuleiroVisao {
 	}
 	
 	public void ajustar(double lado) {
+		base.setPrefWidth(lado-1);
+		informativa.setPrefWidth(lado-1);
+		pecas.setPrefWidth(lado-1);
+		base.setPrefHeight(lado-1);
+		informativa.setPrefHeight(lado+30);
+		pecas.setPrefHeight(lado-1);
 		double medida = (lado - 1)/8;
-		for(int i=0;i<8;i++) {			
+		for(int i=0;i<8;i++) {					
 			for(int j=0;j<8;j++) {
 				casas[i][j].setWidth(medida);
 				casas[i][j].setHeight(medida);			
@@ -170,6 +183,9 @@ public class TabuleiroVisao {
 				espacos[i][j].setHeight(medida);
 			}
 		}
+		selecionada.setWidth(medida);
+		selecionada.setHeight(medida);
+		
 		atualizarPecas();
 	}
 	public void atualizarPecas() {

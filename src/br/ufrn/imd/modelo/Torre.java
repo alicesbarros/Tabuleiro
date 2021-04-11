@@ -17,25 +17,15 @@ public class Torre extends Peca{
 		ArrayList<Casa> possiveis = new ArrayList<Casa>(); 
 		int lin = this.getPosicao(1);
 		int col = this.getPosicao(0);
-		int cont=0;
-		while(col+cont<8 && T.getCasa()[lin][col+cont].getOcupada()==null) {
-			possiveis.add(T.getCasa()[lin][col+cont]);
-			cont++;
-		}
-		cont=0;
-		while(col-cont>=0 && T.getCasa()[lin][col-cont].getOcupada()==null) {
-			possiveis.add(T.getCasa()[lin][col-cont]);
-			cont++;
-		}
-		cont=0;
-		while(lin+cont<8 && T.getCasa()[lin+cont][col].getOcupada()==null) {
-			possiveis.add(T.getCasa()[lin+cont][col]);
-			cont++;
-		}
-		cont=0;
-		while(lin-cont>=0 && T.getCasa()[lin-cont][col].getOcupada()==null) {
-			possiveis.add(T.getCasa()[lin-cont][col]);
-			cont++;
+		int[][] dir = {{-1,0},{0,-1},{0,1},{1,0}};
+		for (int[] mod:dir) {
+			int i=lin;
+			int j=col;
+			while(i<8 && i>=0 && j<8 && j>=0 && T.getCasa()[j][i].getOcupada()==null) {
+				possiveis.add(T.getCasa()[j][i]);
+			}
+			i = i+mod[0];
+			j = j+mod[1];
 		}
 		return possiveis;
 	}

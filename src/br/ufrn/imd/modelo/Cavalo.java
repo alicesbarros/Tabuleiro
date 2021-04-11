@@ -17,15 +17,20 @@ public class Cavalo extends Peca{
 		ArrayList<Casa> possiveis = new ArrayList<Casa>(); 
 		int lin = this.getPosicao(1);
 		int col = this.getPosicao(0);
-		int mod[][]= {{-2,-1},{-2,1},{-1,-2},{-1,2},{1,-2},{1,2},{2,-1},{2,1}};
-		
-		for(int i=0;i<8;i++) {
-			if(lin-mod[i][0]>=0 && lin-mod[i][0]<8 && col-mod[i][1]<8 && col-mod[i][1]>=0) {
-				if(T.getCasa()[lin-mod[i][0]][col-mod[i][1]].getOcupada()==null) {
-					possiveis.add(T.getCasa()[lin-mod[i][0]][col-mod[i][1]]);										
+		int[][] dir = {{2,1},{2,-1},{1,2},{1,-2},{-1,2},{-1,-2},{-2,-1},{-2,1}};
+		for(int[] mod :dir) {
+			int i = lin+mod[0];
+			int j = col+mod[1];
+			if(i<0 || i>7 || j<0 || j>7) continue;
+			else {
+				if(T.getCasa()[j][i].getOcupada()==null) {
+					if(!possiveis.contains(T.getCasa()[i][j])) {
+						possiveis.add(T.getCasa()[i][j]);
+					}
 				}
 			}
-		}			
+		}
+			
 		return possiveis;
 	}
 

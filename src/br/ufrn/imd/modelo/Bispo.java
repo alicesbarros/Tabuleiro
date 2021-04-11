@@ -16,23 +16,16 @@ public class Bispo extends Peca{
 		ArrayList<Casa> possiveis = new ArrayList<Casa>(); 
 		int lin = this.getPosicao(1);
 		int col = this.getPosicao(0);
-		int a = -1;
-		int b = -1;
-		for(int dir=0;dir<4;dir++) {
-			if(dir/2==1) a= 1;
-			if(dir%2==1) b= 1;
-			else b=-1;
-			for(int i=1;i<8;i++) {
-				if (lin+a*i<8 && lin+a*i>=0 && col+b*i<8 && col+b*i>=0) {
-					if(T.getCasa()[lin+a*i][col+b*i].getOcupada()==null) {
-						if(!possiveis.contains(T.getCasa()[lin+a*i][col+b*i])) {
-							possiveis.add(T.getCasa()[lin+a*i][col+b*i]);
-						}
-					} else break;
-				}else break;
+		int[][] dir = {{-1,-1},{-1,1},{1,-1},{1,1}};
+		for (int[] mod:dir) {
+			int i=lin;
+			int j=col;
+			while(i<8 && i>=0 && j<8 && j>=0 && T.getCasa()[j][i].getOcupada()==null) {
+				possiveis.add(T.getCasa()[j][i]);
 			}
+			i = i+mod[0];
+			j = j+mod[1];
 		}
-
 		return possiveis;
 	}
 

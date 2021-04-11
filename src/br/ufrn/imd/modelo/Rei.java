@@ -16,12 +16,14 @@ public class Rei extends Peca{
 		ArrayList<Casa> possiveis = new ArrayList<Casa>(); 
 		int lin = this.getPosicao(1);
 		int col = this.getPosicao(0);
-		for(int i=-1;i<=1;i++) {
-			for(int j=-1;j<=1;j++) {
-				if(lin+i<8 && lin+i>=0 && col+j<8 && col+j>=0) {
-					if(T.getCasa()[lin+i][col+j].getOcupada()==null) {
-						possiveis.add(T.getCasa()[lin+i][col+j]);			
-					}
+		for(int i=lin-1;i<=lin+1;i++) {
+			if(i<0) i++;
+			if(i>7)break;
+			for(int j=col-1;j<=col+1;j++) {
+				if(j<0) j++;
+				if(j>7)break;
+				if(T.getCasa()[j][i].getOcupada()==null) {
+					possiveis.add(T.getCasa()[i][j]);				
 				}
 			}				
 		}			
