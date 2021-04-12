@@ -1,12 +1,8 @@
-# Tabuleiro
-Projeto para disciplina Linguagem de Programacao II
+Tabuleiro de Xadrez com JavaFX para a disciplina Linguagem de Programação II, ministrada pelo professor João Carlos Xavier
 
-### Introdução:
+Introdução
 
-### Interface Gráfica do JavaFX
-
-### Como Compilar:
+Interface Gráfica do JavaFX
 
 
-
-Estudantes: Alice Soares P. de Barros e Elton Gil Xavier Moura.
+Estudantes: Alice Soares P. de Barros e Elton G. X. Moura.
