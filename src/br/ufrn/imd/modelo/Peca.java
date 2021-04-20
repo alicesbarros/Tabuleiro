@@ -52,7 +52,10 @@ public abstract class Peca implements Movimentos {
 	}
 	public void mover(Casa nova) {
 		this.getPosicao().setOcupada(null);
+		System.out.println(this.getPosicao().getOcupada());
+		System.out.println(this.getPosicao());
 		nova.setOcupada(this);
+		System.out.println(this.getPosicao());
 		this.setPosicao(nova);
 		this.setMoveu(true);
 	}

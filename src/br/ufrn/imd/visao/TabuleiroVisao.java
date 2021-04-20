@@ -17,19 +17,19 @@ import java.util.ArrayList;
 import javafx.scene.text.Text;
 
 public class TabuleiroVisao {
-	GridPane base;
-	Rectangle[][] casas;
-	Rectangle[][] ocupadas;
-	Rectangle[][] espacos;
-	Tabuleiro tabula;	
-	StackPane niveis;
-	GridPane pecas;
-	GridPane informativa;
-	Rectangle selecionada;
-	ArrayList<Rectangle> podeIr;
-	int selecao[];
-	Jogador daVez;	
-	Text mensagem;
+	private GridPane base;
+	private Rectangle[][] casas;
+	private Rectangle[][] ocupadas;
+	private Rectangle[][] espacos;
+	private Tabuleiro tabula;	
+	private StackPane niveis;
+	private GridPane pecas;
+	private GridPane informativa;
+	private Rectangle selecionada;
+	private ArrayList<Rectangle> podeIr;
+	private int selecao[];
+	private Jogador daVez;	
+	private Text mensagem;
 	
 	public TabuleiroVisao(){
 		base = new GridPane();
@@ -66,7 +66,7 @@ public class TabuleiroVisao {
 			podeIr.add(tempAzul);
 		}
 		
-		tabula = new Tabuleiro();
+		tabula = Tabuleiro.getInstance();
 		
 		for(int i=0;i<8;i++) {
 			for(int j=0;j<8;j++) {
@@ -114,8 +114,9 @@ public class TabuleiroVisao {
 								break;
 							int m = informativa.getColumnIndex(possivel);
 							int n = informativa.getRowIndex(possivel);							
-							if(i==m && j==n) {
-								tabula.getCasa()[k][l].getOcupada().mover(tabula.getCasa()[m][n]);									
+							if(i==n && j==m) {
+								tabula.getCasa()[k][l].getOcupada().mover(tabula.getCasa()[m][n]);	
+								System.out.println(tabula.getCasa()[m][n].toString());
 								atualizarPecas();
 								movimentoConcluido = true;
 							}

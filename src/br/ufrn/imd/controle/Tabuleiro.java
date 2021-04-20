@@ -7,8 +7,12 @@ public class Tabuleiro {
 	private Jogador branco;
 	private Jogador preto;
 	private Casa casa[][];
-
-	public Tabuleiro() {
+	private static Tabuleiro unico = new Tabuleiro();
+	public static Tabuleiro getInstance() {
+		return unico;
+	}
+	private Tabuleiro() {
+		
 		branco = new Jogador(false);
 		preto = new Jogador(true);
 		casa = new Casa[8][8];
